@@ -1,0 +1,365 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  border-color: transparent;
+  outline: none;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(221, 218, 218);
+}
+
+.expense {
+  background: #e2f3ff;
+  box-shadow: 10px 10px 30px 1px #000;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+  padding: 1% 0 1% 0;
+}
+
+.expense__header {
+  font-size: 300%;
+  font-style: italic;
+  font-weight: 300;
+  padding: 1% 0 3% 0;
+}
+
+.expense__add {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding: 0 0 2% 0;
+}
+
+.expense__where,
+.expense__sum {
+  display: flex;
+  flex-direction: column;
+}
+
+.expense__where-text,
+.expense__sum-text {
+  padding-bottom: 5%;
+  font-size: 80%;
+}
+
+.expense__where-input input {
+  width: 210%;
+  border-radius: 3px;
+  height: 150%;
+}
+
+.expense__sum-input input {
+  width: 170%;
+  border-radius: 3px;
+  height: 150%;
+}
+
+.expense__btn {
+  display: flex;
+  align-items: flex-end;
+}
+
+.expense__btn button {
+  font-size: 100%;
+  border-radius: 3px;
+  background: #79caab;
+  padding: 5%;
+  transform: translateY(30%);
+  margin-left: -60%;
+}
+
+.expense__total {
+  padding: 2%;
+  width: 75%;
+  display: flex;
+  justify-content: right;
+  font-size: 130%;
+}
+
+.expense__total-text {
+  margin-right: 2%;
+}
+
+.expense__items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 92%;
+}
+
+.expense__item {
+  font-size: 130%;
+  display: flex;
+  width: 85%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2%;
+}
+
+.expense__item-where,
+.expense__item-info,
+.expense__item-icons {
+  width: 33.3%;
+  display: flex;
+}
+
+.expense__item-where {
+  width: 100%;
+}
+
+.expense__item-index {
+  margin-right: 3%;
+}
+
+.expense__item-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.expense__item-about {
+  justify-content: space-around;
+  display: flex;
+  width: 140%;
+  align-items: center;
+}
+
+.expense__item-info {
+  width: 60%;
+  justify-content: space-around;
+}
+
+.expense__item-date {
+  margin-right: 10%;
+}
+
+.expense__item-icons {
+  width: 13%;
+  justify-content: start;
+}
+
+.expense__item-delete,
+.expense__item-edit {
+  max-width: 50%;
+}
+
+.expense__item-delete button,
+.expense__item-edit button{
+  background: #e2f3ff;
+}
+
+.expense__item-delete img,
+.expense__item-edit img {
+  width: 100%;
+  height: auto;
+}
+
+.expense__item-edit:hover,
+.expense__item-delete:hover,
+.expense__btn:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 1640px) {
+  .expense__where-input input {
+    width: 170%;
+  }
+
+  .expense__sum-input input {
+    width: 150%;
+  }
+}
+
+@media (max-width: 1400px) {
+  .expense__header {
+    font-size: 200%;
+  }
+  .expense__where-text,
+  .expense__sum-text {
+    font-size: 80%;
+  }
+
+  .expense__total,
+  .expense__item {
+    font-size: 100%;
+  }
+
+  .expense__btn button {
+    font-size: 80%;
+  }
+}
+
+@media (max-width: 1270px) {
+  .expense__where-input input {
+    width: 140%;
+  }
+
+  .expense__sum-input input {
+    width: 110%;
+  }
+}
+
+@media (max-width: 990px) {
+  .expense__header {
+    width: 100%;
+    text-align: left;
+    margin-left: 15%;
+  }
+
+  .expense__add {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 15%;
+  }
+
+  .expense__where-input input {
+    width: 210%;
+    height: 35px;
+  }
+
+  .expense__sum-input input {
+    width: 195%;
+    height: 35px;
+  }
+
+  .expense__sum-text {
+    padding-top: 10%;
+  }
+
+  .expense__total {
+    width: 100%;
+    justify-content: start;
+    margin-left: 10%;
+  }
+
+  .expense__total-text,
+  .expense__total-sum{
+    transform: translateX(480%);
+  }
+
+  .expense__total-text {
+    margin-right: -3%;
+  }
+
+  .expense__item-about {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    transform: translate(40%, 20%);
+    align-items: flex-end;
+  }
+
+  .expense__item-info {
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-90%);
+  }
+
+  .expense__item-date {
+    transform: translateX(10%);
+  }
+
+  .expense__item-sum {
+    width: 87%;
+    text-align: end;
+    transform: translateX(-10%);
+  }
+
+  .expense__item-icons {
+    justify-content: end;
+    padding: 4% 0 0 0;
+    width: 30%;
+    transform: translateX(-230%);
+  }
+
+  .expense__btn button{
+    width: 160%;
+  }
+
+  .expense__btn {
+    transform: translateX(440%);
+  }
+
+  .expense__item {
+    margin-left: -9%;
+  }
+
+  .expense__where-text,
+  .expense__sum-text {
+    font-size: 90%;
+  }
+
+  .expense__item-where {
+    width: 50%;
+  }
+
+  .expense__item-delete,
+  .expense__item-edit {
+    margin: 4%;
+  }
+
+  .expense {
+    width: 500px;
+  }
+}
+
+@media (max-width: 500px) {
+  .expense {
+    width: 300px;
+  }
+
+  .expense__where-input input,
+  .expense__sum-input input {
+    width: 140%;
+  }
+
+  .expense__header {
+    font-size: 150%;
+  }
+
+  .expense__where-text,
+  .expense__sum-text {
+    font-size: 70%;
+  }
+
+  .expense__btn {
+    transform: translateX(260%);
+  }
+
+  .expense__total-text,
+  .expense__total-sum{
+    transform: translateX(300%);
+    font-size: 90%;
+  }
+
+  .expense__item {
+    font-size: 90%;
+  }
+
+  .expense__item-sum {
+    transform: translateX(30%);
+  }
+
+  .expense__item-icons {
+    transform: translateX(-90%);
+    width: 50%;
+  }
+
+  .expense__item-about {
+    transform: translate(40%, 10%);
+  }
+}
