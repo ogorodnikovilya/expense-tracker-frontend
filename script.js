@@ -12,12 +12,8 @@ window.onload = async() => {
     });
     const result = await resp.json();
 
-    if (resp.status !== 404) {
       allExpense = result.data;
       render();
-    } else {
-      throw new Error(result.message);
-    };
   } catch (error) {
     alert(error);
   };
@@ -43,15 +39,11 @@ const addExpense = async() => {
       })
     });
     const result = await resp.json();
-    console.log(result);
-    if (resp.status !== 404) {
-      allExpense.push(result);
-      inputTextExpense.value = "";
-      inputSumExpense.value = "";
-    } else {
-      throw new Error(result.message);
-    }
-  render();
+
+    allExpense.push(result);
+    inputTextExpense.value = "";
+    inputSumExpense.value = "";
+    render();
   } catch (error) {
     alert(error);
   };
@@ -221,13 +213,16 @@ const saveChangeExpense = async(_id) => {
         })
       });
     const response = await resp.json();
+    const {titleExpense, date, cost} = response;
 
-    if (resp.status !== 404) {
-      allExpense = response;
+      allExpense.forEach(el => {
+        if (el._id === response._id) {
+          el.titleExpense = titleExpense;
+          el.date = date;
+          el.cost = cost;
+        };
+      });
       render();
-    } else {
-      throw new Error(response.message);
-    };
   } catch (error) {
     alert(error);
   };
@@ -235,17 +230,12 @@ const saveChangeExpense = async(_id) => {
 
 const deleteExpense = async (id) => { 
   try {
-    const resp = await fetch(`${url}/deleteExpense/?id=${id}`, {
+    await fetch(`${url}/deleteExpense/?id=${id}`, {
       method: 'DELETE', 
-    });   
-    const response = await resp.json();
-    
-    if (resp.status !== 404) {
+    });
+
       allExpense = allExpense.filter((item) => id !== item._id);
       render();
-    } else {
-      throw new Error(response.message);
-    };
   } catch (error) {
     alert(error);
   };

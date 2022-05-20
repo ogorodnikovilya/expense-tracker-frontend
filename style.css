@@ -69,12 +69,12 @@ body {
   height: 150%;
 }
 
-.expense__btn {
+.expense__button-add {
   display: flex;
   align-items: flex-end;
 }
 
-.expense__btn button {
+.expense__button-add button {
   font-size: 100%;
   border-radius: 3px;
   background: #79caab;
@@ -170,7 +170,7 @@ body {
 
 .expense__item-edit:hover,
 .expense__item-delete:hover,
-.expense__btn:hover {
+.expense__button-add:hover {
   transform: scale(1.05);
 }
 
@@ -198,7 +198,7 @@ body {
     font-size: 100%;
   }
 
-  .expense__btn button {
+  .expense__button-add button {
     font-size: 80%;
   }
 }
@@ -227,7 +227,7 @@ body {
   }
 
   .expense__where-input input {
-    width: 210%;
+    width: 195%;
     height: 35px;
   }
 
@@ -286,11 +286,11 @@ body {
     transform: translateX(-230%);
   }
 
-  .expense__btn button{
+  .expense__button-add button{
     width: 160%;
   }
 
-  .expense__btn {
+  .expense__button-add {
     transform: translateX(440%);
   }
 
@@ -336,7 +336,7 @@ body {
     font-size: 70%;
   }
 
-  .expense__btn {
+  .expense__button-add {
     transform: translateX(260%);
   }
 
