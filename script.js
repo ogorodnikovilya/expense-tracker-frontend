@@ -177,7 +177,6 @@ const enterChangeExpense = (el) => {
   inputSum.style.width = '60px';
   inputDate.style.width = '100px';
   
-  
   expenseWhere.appendChild(inputWhere);
   expenseInfo.appendChild(inputDate);
   expenseInfo.appendChild(inputSum);
@@ -218,14 +217,14 @@ const saveChangeExpense = async(id) => {
     const response = await resp.json();
     const {_id, titleExpense, date, cost} = response;
 
-      allExpense.forEach(el => {
-        if (el._id === _id) {
-          el.titleExpense = titleExpense;
-          el.date = date;
-          el.cost = cost;
-        };
-      });
-      render();
+    allExpense.forEach(el => {
+      if (el._id === _id) {
+        el.titleExpense = titleExpense;
+        el.date = date;
+        el.cost = cost;
+      };
+    });
+    render();
   } catch (error) {
     alert(error);
   };
@@ -237,8 +236,8 @@ const deleteExpense = async (id) => {
       method: 'DELETE', 
     });
 
-      allExpense = allExpense.filter((item) => id !== item._id);
-      render();
+    allExpense = allExpense.filter((item) => id !== item._id);
+    render();
   } catch (error) {
     alert(error);
   };
