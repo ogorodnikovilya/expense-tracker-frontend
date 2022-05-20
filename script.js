@@ -12,8 +12,8 @@ window.onload = async() => {
     });
     const result = await resp.json();
 
-      allExpense = result.data;
-      render();
+    allExpense = result.data;
+    render();
   } catch (error) {
     alert(error);
   };
@@ -34,7 +34,6 @@ const addExpense = async() => {
       headers: headersOption,
       body: JSON.stringify({
         titleExpense: inputTextExpense.value,
-        date: new Date().toLocaleDateString('en-GB'),
         cost: inputSumExpense.value
       })
     });
@@ -57,10 +56,9 @@ const render = () => {
     list.removeChild(list.firstChild);
   };
 
-  let initialValue = 0;
-  let checkReduce = allExpense.reduce(function (sum, currentSum) {
+  let checkReduce = allExpense.reduce((sum, currentSum) => {
     return sum += currentSum.cost;
-  }, initialValue);
+  }, 0);
 
   totalSum.innerText = `${checkReduce} р.`;
 
@@ -104,7 +102,7 @@ const render = () => {
 
     numberExpense.innerText = `${index+1})`;
     expenseName.innerText = titleExpense;
-    expenseDate.innerText = date.split('/').join('.');
+    expenseDate.innerText = moment(date).format('DD.MM.YY')
     expenseSum.innerText = `${cost} р.`;
     editImg.src = 'img/edit.png';
     deleteImg.src = 'img/delete.png';
@@ -135,12 +133,13 @@ const render = () => {
       expenseInfo.removeChild(expenseDate);
       expenseInfo.removeChild(expenseSum);
 
-      enterChangeExpense(_id, el);
+      enterChangeExpense(el);
     };
   }); 
 };
 
-const enterChangeExpense = (_id, el) => {
+const enterChangeExpense = (el) => {
+  const {titleExpense, _id, cost} = el;
   const expenseChange = document.getElementById(`expenseChange-${_id}`);
   const expenseInfo = document.getElementById(`expenseInfo-${_id}`);
   const expenseWhere = document.getElementById(`expenseWhere-${_id}`);
@@ -171,10 +170,10 @@ const enterChangeExpense = (_id, el) => {
   inputDate.classList.add('expense__item-date');
   inputSum.classList.add('expense__item-sum');
 
-  inputWhere.value = el.titleExpense;
+  inputWhere.value = titleExpense;
   inputDate.type = 'date';
   inputSum.type = 'number';
-  inputSum.value = el.cost;
+  inputSum.value = cost;
   inputSum.style.width = '60px';
   inputDate.style.width = '100px';
   
@@ -186,20 +185,24 @@ const enterChangeExpense = (_id, el) => {
   saveBtn.onclick = () => {
     if (inputDate.value === '') {
       alert('Выберите дату');
-    } else if (inputWhere.value === '') {
-      alert('Введите место траты');
-    } else if (inputSum.value === '') {
-      alert('Введите cумму траты');
-    } else {
-    saveChangeExpense(_id);
+      return;
     };
-  };  
+    if (inputWhere.value === '') {
+      alert('Введите место траты');
+      return;
+    };
+    if (inputSum.value === '') {
+      alert('Введите cумму траты');
+      return;
+    };
+    saveChangeExpense(_id);
+  };
 };
 
-const saveChangeExpense = async(_id) => {
-  const inputWhere = document.getElementById(`inputWhere-${_id}`);
-  const inputDate = document.getElementById(`inputDate-${_id}`);
-  const inputSum = document.getElementById(`inputSum-${_id}`);
+const saveChangeExpense = async(id) => {
+  const inputWhere = document.getElementById(`inputWhere-${id}`);
+  const inputDate = document.getElementById(`inputDate-${id}`);
+  const inputSum = document.getElementById(`inputSum-${id}`);
 
   try {
     const resp = await fetch(`${url}/changeExpense`, {
@@ -207,16 +210,16 @@ const saveChangeExpense = async(_id) => {
       headers: headersOption,
         body: JSON.stringify({
           titleExpense: inputWhere.value,
-          date: inputDate.value.split('-').reverse().join('.'),
+          date: new Date(inputDate.value).toISOString(),
           cost: inputSum.value,
-          _id: _id
+          _id: id
         })
       });
     const response = await resp.json();
-    const {titleExpense, date, cost} = response;
+    const {_id, titleExpense, date, cost} = response;
 
       allExpense.forEach(el => {
-        if (el._id === response._id) {
+        if (el._id === _id) {
           el.titleExpense = titleExpense;
           el.date = date;
           el.cost = cost;
