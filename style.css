@@ -341,7 +341,7 @@ body {
   }
 
   .expense__total-text,
-  .expense__total-sum{
+  .expense__total-sum {
     transform: translateX(300%);
     font-size: 90%;
   }

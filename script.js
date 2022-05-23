@@ -50,7 +50,7 @@ const addExpense = async() => {
 
 const render = () => {
   const list = document.querySelector(".expense__items");
-  let totalSum = document.querySelector(".expense__total-sum");
+  const totalSum = document.querySelector(".expense__total-sum");
   
   while (list.firstChild) {
     list.removeChild(list.firstChild);
@@ -139,7 +139,7 @@ const render = () => {
 };
 
 const enterChangeExpense = (el) => {
-  const {titleExpense, _id, cost} = el;
+  const {titleExpense, _id, cost, date} = el;
   const expenseChange = document.getElementById(`expenseChange-${_id}`);
   const expenseInfo = document.getElementById(`expenseInfo-${_id}`);
   const expenseWhere = document.getElementById(`expenseWhere-${_id}`);
@@ -172,6 +172,7 @@ const enterChangeExpense = (el) => {
 
   inputWhere.value = titleExpense;
   inputDate.type = 'date';
+  inputDate.value = moment(date).format('YYYY-MM-DD')
   inputSum.type = 'number';
   inputSum.value = cost;
   inputSum.style.width = '60px';
@@ -213,7 +214,7 @@ const saveChangeExpense = async(id) => {
           cost: inputSum.value,
           _id: id
         })
-      });
+    });
     const response = await resp.json();
     const {_id, titleExpense, date, cost} = response;
 
