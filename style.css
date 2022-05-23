@@ -174,6 +174,14 @@ body {
   transform: scale(1.05);
 }
 
+.expense__item-date input {
+  width: 60px;
+}
+
+.expense__item-sum {
+  width: 100px;
+}
+
 @media (max-width: 1640px) {
   .expense__where-input input {
     width: 170%;

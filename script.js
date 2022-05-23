@@ -175,8 +175,6 @@ const enterChangeExpense = (el) => {
   inputDate.value = moment(date).format('YYYY-MM-DD')
   inputSum.type = 'number';
   inputSum.value = cost;
-  inputSum.style.width = '60px';
-  inputDate.style.width = '100px';
   
   expenseWhere.appendChild(inputWhere);
   expenseInfo.appendChild(inputDate);
