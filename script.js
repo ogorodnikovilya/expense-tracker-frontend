@@ -26,7 +26,8 @@ const addExpense = async() => {
   if(inputTextExpense.value.trim() === '' || inputSumExpense.value.trim() === '') {
     inputTextExpense.value = "";
     inputSumExpense.value = "";
-    return alert("Введите данные");
+    alert("Введите данные");
+    return;
   };
   try {
     const resp = await fetch(`${url}/createExpense`, {
@@ -208,7 +209,7 @@ const saveChangeExpense = async(id) => {
       headers: headersOption,
         body: JSON.stringify({
           titleExpense: inputWhere.value,
-          date: new Date(inputDate.value).toISOString(),
+          date: moment(inputDate.value),
           cost: inputSum.value,
           _id: id
         })
