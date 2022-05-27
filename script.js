@@ -15,7 +15,7 @@ window.onload = async() => {
     allExpense = result.data;
     render();
   } catch (error) {
-    alert(error);
+    alert('Ошибка загрузки данных');
   };
 };
 
@@ -23,33 +23,32 @@ const addExpense = async() => {
   inputTextExpense = document.querySelector(".expense__where-input > input");
   inputSumExpense = document.querySelector(".expense__sum-input > input");
 
-  if (inputTextExpense !== null && inputSumExpense !== null) {
-    if(inputTextExpense.value.trim() === '' || inputSumExpense.value.trim() === '') {
-      inputTextExpense.value = "";
-      inputSumExpense.value = "";
-      alert("Введите данные");
-      return;
-    };
-    try {
-      const resp = await fetch(`${url}/createExpense`, {
-        method: 'POST',
-        headers: headersOption,
-        body: JSON.stringify({
-          titleExpense: inputTextExpense.value,
-          cost: inputSumExpense.value
-        })
-      });
-      const result = await resp.json();
-  
-      allExpense.push(result);
-      inputTextExpense.value = "";
-      inputSumExpense.value = "";
-      render();
-    } catch (error) {
-      alert(error);
-    };
-  } else {
-    alert('Поля ввода отсутствуют');
+  if(inputTextExpense.value.trim() === '' 
+    || inputSumExpense.value.trim() === ''
+    || inputTextExpense === null
+    || inputSumExpense === null
+  ){
+    inputTextExpense.value = "";
+    inputSumExpense.value = "";
+    return;
+  };
+  try {
+    const resp = await fetch(`${url}/createExpense`, {
+      method: 'POST',
+      headers: headersOption,
+      body: JSON.stringify({
+        titleExpense: inputTextExpense.value,
+        cost: inputSumExpense.value
+      })
+    });
+    const result = await resp.json();
+
+    allExpense.push(result);
+    inputTextExpense.value = "";
+    inputSumExpense.value = "";
+    render();
+  } catch (error) {
+    alert('Ошибка добавления данных');
   };
 };
 
@@ -234,7 +233,7 @@ const saveChangeExpense = async(id) => {
     });
     render();
   } catch (error) {
-    alert(error);
+    alert('Ошибка сохранения данных');
   };
 };
 
@@ -247,6 +246,6 @@ const deleteExpense = async (id) => {
     allExpense = allExpense.filter((item) => id !== item._id);
     render();
   } catch (error) {
-    alert(error);
+    alert('Ошибка удаления данных');
   };
 };
