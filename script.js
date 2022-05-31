@@ -23,10 +23,10 @@ const addExpense = async() => {
   inputTextExpense = document.querySelector(".expense__where-input > input");
   inputSumExpense = document.querySelector(".expense__sum-input > input");
 
-  if(inputTextExpense.value.trim() === '' 
-    || inputSumExpense.value.trim() === ''
-    || inputTextExpense === null
+  if(inputTextExpense === null
     || inputSumExpense === null
+    || inputTextExpense.value.trim() === '' 
+    || inputSumExpense.value.trim() === ''
   ){
     inputTextExpense.value = "";
     inputSumExpense.value = "";
