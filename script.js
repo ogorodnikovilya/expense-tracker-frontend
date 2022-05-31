@@ -38,7 +38,7 @@ const addExpense = async() => {
       headers: headersOption,
       body: JSON.stringify({
         titleExpense: inputTextExpense.value,
-        cost: inputSumExpense.value
+        cost: +inputSumExpense.value
       })
     });
     const result = await resp.json();
@@ -105,7 +105,7 @@ const render = () => {
       expenseDelete.classList.add('expense__item-delete');
       deleteBtn.classList.add('expense__item-delete-btn');
   
-      numberExpense.innerText = `${index+1})`;
+      numberExpense.innerText = `${index + 1})`;
       expenseName.innerText = titleExpense;
       expenseDate.innerText = moment(date).format('DD.MM.YY');
       expenseSum.innerText = `${cost} р.`;
@@ -142,7 +142,7 @@ const render = () => {
       };
     });
   } else {
-    alert("Отрисовка невозможна из-за отсутствия полей");
+    return;
   };
 };
 
@@ -217,7 +217,7 @@ const saveChangeExpense = async(id) => {
       body: JSON.stringify({
         titleExpense: inputWhere.value,
         date: moment(inputDate.value),
-        cost: inputSum.value,
+        cost: +inputSum.value,
         _id: id
       })
     });
