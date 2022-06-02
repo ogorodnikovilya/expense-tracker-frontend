@@ -23,15 +23,16 @@ const addExpense = async() => {
   inputTextExpense = document.querySelector(".expense__where-input > input");
   inputSumExpense = document.querySelector(".expense__sum-input > input");
 
-  if(inputTextExpense === null
-    || inputSumExpense === null
-    || inputTextExpense.value.trim() === '' 
-    || inputSumExpense.value.trim() === ''
-  ){
+  if (inputTextExpense === null || inputSumExpense === null) {
+    return;
+  };
+
+  if(inputTextExpense.value.trim() === '' || inputSumExpense.value.trim() === '') {
     inputTextExpense.value = "";
     inputSumExpense.value = "";
     return;
   };
+
   try {
     const resp = await fetch(`${url}/createExpense`, {
       method: 'POST',
@@ -56,94 +57,94 @@ const render = () => {
   const list = document.querySelector(".expense__items");
   const totalSum = document.querySelector(".expense__total-sum");
 
-  if (list !== null && totalSum !== null) {
-    while (list.firstChild) {
-      list.removeChild(list.firstChild);
-    };
-  
-    let checkReduce = allExpense.reduce((sum, currentSum) => {
-      return sum += currentSum.cost;
-    }, 0);
-  
-    totalSum.innerText = `${checkReduce} р.`;
-  
-    allExpense.forEach((el, index) => {
-      const {titleExpense, date, _id, cost} = el;
-  
-      const expenseItem = document.createElement('div');
-      const expenseWhere = document.createElement('div');
-      const numberExpense = document.createElement('div');
-      const expenseName = document.createElement('div');
-      const aboutExpense = document.createElement('div');
-      const expenseInfo = document.createElement('div');
-      const expenseDate = document.createElement('div');
-      const expenseSum = document.createElement('div');
-      const expenseChange = document.createElement('div');
-      const expenseEdit = document.createElement('div');
-      const editBtn = document.createElement('button');
-      const editImg = document.createElement('img');
-      const expenseDelete = document.createElement('div');
-      const deleteBtn = document.createElement('button');
-      const deleteImg = document.createElement('img');
-  
-      expenseWhere.id = `expenseWhere-${_id}`;
-      expenseChange.id = `expenseChange-${_id}`;
-      expenseInfo.id = `expenseInfo-${_id}`;
-      expenseDelete.id = `expenseDelete-${_id}`;
-  
-      expenseItem.classList.add('expense__item');
-      expenseWhere.classList.add('expense__item-where');
-      numberExpense.classList.add('expense__item-index');
-      expenseName.classList.add('expense__item-name');
-      aboutExpense.classList.add('expense__item-about');
-      expenseInfo.classList.add('expense__item-info');
-      expenseDate.classList.add('expense__item-date');
-      expenseSum.classList.add('expense__item-sum');
-      expenseChange.classList.add('expense__item-icons');
-      expenseEdit.classList.add('expense__item-edit');
-      editBtn.classList.add('expense__item-edit-btn');
-      expenseDelete.classList.add('expense__item-delete');
-      deleteBtn.classList.add('expense__item-delete-btn');
-  
-      numberExpense.innerText = `${index + 1})`;
-      expenseName.innerText = titleExpense;
-      expenseDate.innerText = moment(date).format('DD.MM.YY');
-      expenseSum.innerText = `${cost} р.`;
-      editImg.src = 'img/edit.png';
-      deleteImg.src = 'img/delete.png';
-  
-      list.appendChild(expenseItem);
-      expenseItem.appendChild(expenseWhere);
-      expenseItem.appendChild(aboutExpense);
-      expenseWhere.appendChild(numberExpense);
-      expenseWhere.appendChild(expenseName);
-      aboutExpense.appendChild(expenseInfo);
-      aboutExpense.appendChild(expenseChange);
-      expenseInfo.appendChild(expenseDate);
-      expenseInfo.appendChild(expenseSum);
-      expenseChange.appendChild(expenseEdit);
-      expenseChange.appendChild(expenseDelete);
-      expenseEdit.appendChild(editBtn);
-      editBtn.appendChild(editImg);
-      expenseDelete.appendChild(deleteBtn);
-      deleteBtn.appendChild(deleteImg);
-  
-      expenseDelete.onclick = () => {
-        deleteExpense(_id);
-      };
-  
-      expenseEdit.onclick = () => {
-        expenseChange.removeChild(expenseEdit);
-        expenseWhere.removeChild(expenseName);
-        expenseInfo.removeChild(expenseDate);
-        expenseInfo.removeChild(expenseSum);
-  
-        enterChangeExpense(el);
-      };
-    });
-  } else {
+  if (list === null && totalSum === null) {
     return;
   };
+
+  while (list.firstChild) {
+    list.removeChild(list.firstChild);
+  };
+
+  let checkReduce = allExpense.reduce((sum, currentSum) => {
+    return sum += currentSum.cost;
+  }, 0);
+
+  totalSum.innerText = `${checkReduce} р.`;
+
+  allExpense.forEach((el, index) => {
+    const {titleExpense, date, _id, cost} = el;
+
+    const expenseItem = document.createElement('div');
+    const expenseWhere = document.createElement('div');
+    const numberExpense = document.createElement('div');
+    const expenseName = document.createElement('div');
+    const aboutExpense = document.createElement('div');
+    const expenseInfo = document.createElement('div');
+    const expenseDate = document.createElement('div');
+    const expenseSum = document.createElement('div');
+    const expenseChange = document.createElement('div');
+    const expenseEdit = document.createElement('div');
+    const editBtn = document.createElement('button');
+    const editImg = document.createElement('img');
+    const expenseDelete = document.createElement('div');
+    const deleteBtn = document.createElement('button');
+    const deleteImg = document.createElement('img');
+
+    expenseWhere.id = `expenseWhere-${_id}`;
+    expenseChange.id = `expenseChange-${_id}`;
+    expenseInfo.id = `expenseInfo-${_id}`;
+    expenseDelete.id = `expenseDelete-${_id}`;
+
+    expenseItem.classList.add('expense__item');
+    expenseWhere.classList.add('expense__item-where');
+    numberExpense.classList.add('expense__item-index');
+    expenseName.classList.add('expense__item-name');
+    aboutExpense.classList.add('expense__item-about');
+    expenseInfo.classList.add('expense__item-info');
+    expenseDate.classList.add('expense__item-date');
+    expenseSum.classList.add('expense__item-sum');
+    expenseChange.classList.add('expense__item-icons');
+    expenseEdit.classList.add('expense__item-edit');
+    editBtn.classList.add('expense__item-edit-btn');
+    expenseDelete.classList.add('expense__item-delete');
+    deleteBtn.classList.add('expense__item-delete-btn');
+
+    numberExpense.innerText = `${index + 1})`;
+    expenseName.innerText = titleExpense;
+    expenseDate.innerText = moment(date).format('DD.MM.YY');
+    expenseSum.innerText = `${cost} р.`;
+    editImg.src = 'img/edit.png';
+    deleteImg.src = 'img/delete.png';
+
+    list.appendChild(expenseItem);
+    expenseItem.appendChild(expenseWhere);
+    expenseItem.appendChild(aboutExpense);
+    expenseWhere.appendChild(numberExpense);
+    expenseWhere.appendChild(expenseName);
+    aboutExpense.appendChild(expenseInfo);
+    aboutExpense.appendChild(expenseChange);
+    expenseInfo.appendChild(expenseDate);
+    expenseInfo.appendChild(expenseSum);
+    expenseChange.appendChild(expenseEdit);
+    expenseChange.appendChild(expenseDelete);
+    expenseEdit.appendChild(editBtn);
+    editBtn.appendChild(editImg);
+    expenseDelete.appendChild(deleteBtn);
+    deleteBtn.appendChild(deleteImg);
+
+    expenseDelete.onclick = () => {
+      deleteExpense(_id);
+    };
+
+    expenseEdit.onclick = () => {
+      expenseChange.removeChild(expenseEdit);
+      expenseWhere.removeChild(expenseName);
+      expenseInfo.removeChild(expenseDate);
+      expenseInfo.removeChild(expenseSum);
+
+      enterChangeExpense(el);
+    };
+  });
 };
 
 const enterChangeExpense = (el) => {
