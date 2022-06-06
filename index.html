@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Учет расходов</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="expense">
+    <div class="expense__header">Учет моих расходов</div>
+    <div class="expense__add">
+      <div class="expense__where">
+        <div class="expense__where-text">Куда было потрачено:</div>
+        <div class="expense__where-input">
+          <input placeholder="Куда было потрачено">
+        </div>
+      </div>
+      <div class="expense__sum">
+        <div class="expense__sum-text">Сколько было потрачено:</div>
+        <div class="expense__sum-input">
+          <input placeholder="Сколько было потрачено">
+        </div>
+      </div>
+      <div class="expense__button-add">
+        <button onclick="addExpense()">Добавить</button>
+      </div>
+    </div>
+    <div class="expense__total">
+      <div class="expense__total-text">Итого:</div>
+      <div class="expense__total-sum"></div>
+    </div>
+    <div class="expense__items">
+    </div>
+  </div>
+  <script type="text/JavaScript" src=" https://MomentJS.com/downloads/moment.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
