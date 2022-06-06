@@ -65,7 +65,7 @@ const render = () => {
     list.removeChild(list.firstChild);
   };
 
-  let checkReduce = allExpense.reduce((sum, currentSum) => {
+  const checkReduce = allExpense.reduce((sum, currentSum) => {
     return sum += currentSum.cost;
   }, 0);
 
@@ -190,8 +190,8 @@ const enterChangeExpense = (el) => {
   expenseInfo.appendChild(inputSum);
   
   saveBtn.onclick = () => {
-    if (inputDate.value === '') {
-      alert('Выберите дату');
+    if (inputDate.value === '' || !moment(inputDate.value, 'YYYY-MM-DD').isValid()) {
+      alert('Некорректная дата');
       return;
     };
     if (inputWhere.value === '') {
